@@ -1,5 +1,0 @@
-FROM 
-
-COPY
-
-CMD [ "executable" ]
