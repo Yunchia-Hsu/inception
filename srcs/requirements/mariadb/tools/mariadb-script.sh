@@ -6,11 +6,11 @@ chmod -R 755 /var/lib/mysql
 mkdir -p /run/mysql
 chown -R myaql:mysql /var/lib/mysql /run/mysqld
 #check if mariadb is init
-if [! -d "/var/lib/mysql/mysql"]; then
+if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB system tables..."
     mariadb-install-db --basedir=/usr --user=mysql --datadir=/var/lib/mysql #>/dev/null
 
-    echo "setting yo wordpress database and user~"
+    echo "setting up wordpress database and user~"
     mysqld --user=mysql --bootstrap << EOF
 
 USE mysql;
