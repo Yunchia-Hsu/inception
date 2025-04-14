@@ -1,0 +1,10 @@
+# read by MariaDB server.
+[mysqld]
+#database path
+datadir = /var/lib/mysql
+basedir = /usr
+socket = /run/mysqld/mysql.sock
+#tell mariadb server to check all ip
+bind_address = 0.0.0.0
+port = 3306
+user = mysql

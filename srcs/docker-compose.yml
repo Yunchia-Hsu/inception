@@ -1,32 +1,76 @@
-service:
+services:
+		mariadb:
+			container_name: mariadb
+			build: ./requirements/mariadb
+			image: mariadb:10.11.11
+			restart: always
+			env_file: .env
+			ports:
+				 - "3306:3306"
+			volumes:
+				 - mariadb:/var/lib/mysql
+			networks:
+				 - network
+			healthcheck:
+				 test["CMD", "mariadb-admin", "ping", "--protocol=tcp", "--host=localhost", "-u", "$WORDPRESS_DATABASE_USER", "--password=$WORDPRESS_DATABASE_USER_PASSWORD"]
+				 interval: 10s
+				 timeout: 5s
+				 retries: 5
 
-	mariadb:
-		container_name: mariadb
-		build: ./requirements/mariadb
-		image: mariadb:10.11.11
+
+		wordpress:
+			container_name: wordpress
+			build: ./requirements/wordpress
+			image: worldpress:6.7.2
+			restart: always
+			env_file: .env
+			networks:
+				- networks
+			volumes:
+				- wordpress:/var/www/html
+			depends_on:
+				mariadb:
+					condition: service_healthy
+			healthcheck: 
+					test: ["CMD", "test", "-f", "/var/www/html/sp-login.php"]	
+					interval: 10s
+					timeout: 5s
+					retries: 5
+
+	nginx:
+		container_name: nginx
+		build: ./requirements/nginx
+		image: nginx: 1.26.2
 		restart: always
 		env_file: .env
-		ports:
-			- "3306:3306"
-		volumes:
-			- mariadb:/var/lib/mysql
-		networks:
-			- networks
-		healthcheck:
-			test["CMD", "mariadb-admin", "ping", "--protocol=tcp", "--host=localhost", "-u", "$WORDPRESS_DATABASE_USER", "--password=$WORDPRESS_DATABASE_USER_PASSWORD"]
-			interval: 10s
-			timeour: 5s
-			retries: 5
-
-
-	worldpress:
-		container_name:
-	eginx:
-
+		dependents_on:
+			wordpress:
+				condition: service_healthy
+		networks: 
+			- network
+		ports: 
+			- "443:443"
+		volumes: wordpress:/var/www/html
+			
 
 volumes:
 	mariadb:
-		name: mariadb
-		drive: local
+			name: mariadb
+			drive: local
+			driver_opts: 
+				type: none
+				o: bind
+				device: /home/yhsu/data/mariadb
+		
+		wordpress:
+				name: wordpress
+				drive: local
+				driver_opts:
+					type: none
+					o: bind 
+					device: /home/yhsu/data/wordpress
 
 networks:
+		network: configs
+			name: docker-networks
+				driver: bridge
