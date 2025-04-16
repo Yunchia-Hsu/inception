@@ -44,7 +44,7 @@ services:
       image: nginx:1.26.2
       restart: always
       env_file: .env
-      dependents_on:
+      depends_on:
         wordpress:
           condition: service_healthy
       networks: 
