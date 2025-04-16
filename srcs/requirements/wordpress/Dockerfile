@@ -1,7 +1,7 @@
 FROM alpine:3.20.6
 #install php extensions
 EXPOSE 9000
-RUN apk update && add mariadb-client \
+RUN apk update && apk add mariadb-client \
     php83 \
     #fastcgi process manager (nginx uses to process php)
     php83-fpm \ 
