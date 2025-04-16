@@ -32,11 +32,11 @@ services:
       depends_on: 
         mariadb:
           condition: service_healthy
-      healthcheck: 
-          test: ["CMD", "test", "-f", "/var/www/html/wp-login.php"]	
-          interval: 10s
-          timeout: 5s
-          retries: 5
+      # healthcheck: 
+      #     test: ["CMD", "test", "-f", "/var/www/html/wp-login.php"]	
+      #     interval: 10s
+      #     timeout: 5s
+      #     retries: 5
 
     nginx:
       container_name: nginx
