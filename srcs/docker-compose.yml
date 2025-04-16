@@ -26,7 +26,7 @@ services:
       restart: always
       env_file: .env
       networks:
-        - networks
+        - network
       volumes:
         - wordpress:/var/www/html
       depends_on:
