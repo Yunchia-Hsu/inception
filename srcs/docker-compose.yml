@@ -33,7 +33,7 @@ services:
         mariadb:
           condition: service_healthy
       healthcheck: 
-          test: ["CMD", "test", "-f", "/var/www/html/sp-login.php"]	
+          test: ["CMD", "test", "-f", "/var/www/html/wp-login.php"]	
           interval: 10s
           timeout: 5s
           retries: 5
