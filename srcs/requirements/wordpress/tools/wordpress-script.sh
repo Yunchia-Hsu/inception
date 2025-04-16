@@ -38,9 +38,9 @@ if [! -f /var/www/html/wp-config.php ]; then
         --allow-root \
         $WORDPRESS_USER $WORDPRESS_USER_EMAIL \
         --user_pass=$WORDPRESS_USER_PASSWORD
-	else
-		echo "WordPress is already downloaded, installed and cinfogured."
-	fi
+else
+	echo "WordPress is already downloaded, installed and cinfogured."
+fi
 
     chow -R www-data:www-data /var/www/html
 
