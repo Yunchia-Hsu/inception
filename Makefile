@@ -6,7 +6,7 @@
 #    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 10:54:00 by yhsu              #+#    #+#              #
-#    Updated: 2025/04/16 12:14:38 by yhsu             ###   ########.fr        #
+#    Updated: 2025/04/16 12:18:14 by yhsu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ all: mariadb_data wordpress_data
 
 
 images:
-	@docker-compose -f srcs/docker-compose.yml build	
+	@docker-compose -f $(COMPOSE_FILE) build	
 
 
 # Start all containers in detached mode
