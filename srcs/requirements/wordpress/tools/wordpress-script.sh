@@ -14,7 +14,7 @@ echo "check if mariadb is running before running wordpress"
 # ping  check if mariadb can be connected 
 mariadb-admin ping --protocol=tcp --host=mariadb -u $WORDPRESS_DATABASE_USER --password=$WORDPRESS_DATABASE_USER_PASSWORD --wait=300 
 
-if [! -f /var/www/html/wp-config.php ]; then
+if [ ! -f /var/www/html/wp-config.php ]; then
     echo "now, downlodaing, installing, configuring WordPress files..."
     wp core download --allow-root
 #create wp-config.php  file wp-config.php 是 WordPress 的主要設定檔
