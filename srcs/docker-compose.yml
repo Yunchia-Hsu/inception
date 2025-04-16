@@ -41,7 +41,7 @@ services:
     nginx:
       container_name: nginx
       build: ./requirements/nginx
-      image: nginx: 1.26.2
+      image: nginx:1.26.2
       restart: always
       env_file: .env
       dependents_on:
