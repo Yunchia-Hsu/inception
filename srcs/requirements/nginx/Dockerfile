@@ -18,4 +18,4 @@ RUN chmod 644 /etc/nginx/nginx.conf
 
 EXPOSE 443
 
-CMD ["nginx", "-c", "/etc/nginx/nginx.congf", "-g", "daemon off;"]
+CMD ["nginx", "-c", "/etc/nginx/nginx.conf", "-g", "daemon off;"]
