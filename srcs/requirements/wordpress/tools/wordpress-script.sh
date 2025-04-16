@@ -1,7 +1,7 @@
 #!/bin/sh
 #腳本自動化了從環境配置到 WordPress 安裝與啟動的所有必要步驟
 echo "You are setting up Wordpress..."
-echo "memory_limit = 512M">> /etc/php83/php.ini
+echo "memory_limit = 512M" >> /etc/php83/php.ini
 
 cd /var/www/html
 
