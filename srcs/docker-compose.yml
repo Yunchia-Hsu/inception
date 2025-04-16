@@ -74,5 +74,5 @@ volumes:
 
 networks:
     network:
-      name: docker-networks
+      name: docker-network
       driver: bridge
