@@ -4,7 +4,7 @@ chmod -R 755 /var/lib/mysql
 
 
 mkdir -p /run/mysql
-chown -R myaql:mysql /var/lib/mysql /run/mysqld
+chown -R mysql:mysql /var/lib/mysql /run/mysqld
 #check if mariadb is init
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB system tables..."
