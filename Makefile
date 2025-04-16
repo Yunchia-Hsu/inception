@@ -6,7 +6,7 @@
 #    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 10:54:00 by yhsu              #+#    #+#              #
-#    Updated: 2025/04/16 12:20:21 by yhsu             ###   ########.fr        #
+#    Updated: 2025/04/16 12:32:41 by yhsu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,11 @@ COMPOSE_FILE=srcs/docker-compose.yml
 # Build all direcotries, activate Docker  images defined in docker-compose.yml
 
 all: mariadb_data wordpress_data
-	@echo "creating MariaDb directory"
+	@echo "$(BLUE)creating MariaDb directory$(RESET)"
 	@mkdir -p $(MARIADB_DIR) 
-	@echo "creating Wordpress directory"
+	@echo "$(BLUE)creating Wordpress directory$(RESET)"
 	@mkdir -p $(WORDPRESS_DIR) 
-	@echo "building images and activating containers"
+	@echo "$(BLUE)building images and activating containers$(RESET)"
 	@$(MAKE) images 
 	@$(MAKE) up
 	@echo "DONE~~~"
@@ -56,12 +56,12 @@ logs:
 	docker compose -f $(COMPOSE_FILE)  logs -f
 
 clean: 
-	@echo "clean containers, images, and volumes."
+	@echo "$(BLUE)clean containers, images, and volumes.$(RESET)"
 #--rmi remove all images
 	@docker-compose -f $(COMPOSE_FILE) --rmi down -v
 
 fclean: clean
-	@echo "remove data directories."
+	@echo "$(BLUE)remove data directories.$(RESET)"
 
 
 re: fclean all
