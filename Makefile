@@ -6,7 +6,7 @@
 #    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 10:54:00 by yhsu              #+#    #+#              #
-#    Updated: 2025/04/16 12:18:14 by yhsu             ###   ########.fr        #
+#    Updated: 2025/04/16 12:20:21 by yhsu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,23 +37,23 @@ all: mariadb_data wordpress_data
 
 
 images:
-	@docker-compose -f $(COMPOSE_FILE) build	
+	@docker compose -f $(COMPOSE_FILE) build	
 
 
 # Start all containers in detached mode
 up:
-	@docker-compose -f $(COMPOSE_FILE) up -d
+	@docker compose -f $(COMPOSE_FILE) up -d
 
 
 # Stop and remove containers, networks, volumes, and images 
 down:
-	@docker-compose -f $(COMPOSE_FILE)  down
+	@docker compose -f $(COMPOSE_FILE)  down
 
 
 
 #follow logs for all services
 logs:
-	docker-compose -f $(COMPOSE_FILE)  logs -f
+	docker compose -f $(COMPOSE_FILE)  logs -f
 
 clean: 
 	@echo "clean containers, images, and volumes."
