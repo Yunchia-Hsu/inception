@@ -51,7 +51,8 @@ services:
         - network
       ports: 
         - "443:443"
-      volumes: wordpress:/var/www/html
+      volumes: 
+        - wordpress:/var/www/html
       
 
 volumes:
