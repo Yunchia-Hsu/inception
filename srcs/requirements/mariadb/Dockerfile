@@ -1,6 +1,6 @@
 FROM alpine:3.20.6
 
-RUN apk update && apk add mariadb mariadb-clinet
+RUN apk update && apk add mariadb mariadb-client
 
 COPY ./conf/mariadb_config /etc/my.cnf.d/mariadb_config
 RUN  chmod 644 /etc/my.cnf.d/mariadb_config
