@@ -3,7 +3,7 @@ FROM alpine:3.20.6
 
 RUN apk update && apk add nginx openssl
 #remove default config
-RUN rm/etc/nginx/conf.d/default.conf
+RUN rm /etc/nginx/conf.d/default.conf
 
 RUN mkdir -p /etc/nginx/ssl
 
