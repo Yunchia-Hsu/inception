@@ -17,7 +17,6 @@ mariadb-admin ping --protocol=tcp --host=mariadb -u $WORDPRESS_DATABASE_USER --p
 if [ ! -f /var/www/html/wp-config.php ]; then
     echo "NOW, downlodaing, installing, configuring WordPress files..."
     wp core download --allow-root
-#create wp-config.php  file wp-config.php 是 WordPress 的主要設定檔
     wp config create \
         --dbname=$WORDPRESS_DATABASE_NAME \
         --dbuser=$WORDPRESS_DATABASE_USER \
@@ -34,7 +33,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --path=/var/www/html
 
     echo "create WP user..."
-    wp user creat \
+    wp user create \
         --allow-root \
         $WORDPRESS_USER $WORDPRESS_USER_EMAIL \
         --user_pass=$WORDPRESS_USER_PASSWORD
@@ -46,5 +45,5 @@ fi
 
     chmod -R 755 /var/www/html/
 
-    echo "Runninf php in the foreground "
+    echo "Running php in the foreground "
     php-fpm83 -F
