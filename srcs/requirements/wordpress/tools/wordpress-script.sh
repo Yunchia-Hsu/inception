@@ -15,7 +15,7 @@ echo "check if mariadb is running before running wordpress"
 mariadb-admin ping --protocol=tcp --host=mariadb -u $WORDPRESS_DATABASE_USER --password=$WORDPRESS_DATABASE_USER_PASSWORD --wait=300 
 
 if [ ! -f /var/www/html/wp-config.php ]; then
-    echo "now, downlodaing, installing, configuring WordPress files..."
+    echo "NOW, downlodaing, installing, configuring WordPress files..."
     wp core download --allow-root
 #create wp-config.php  file wp-config.php 是 WordPress 的主要設定檔
     wp config create \
@@ -25,7 +25,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --dbhost=mariadb \
         --force
 
-    wp core install --url="DOMAIN_NAME" --title="$WORDPRESS_TITLE" \
+    wp core install --url="$DOMAIN_NAME" --title="$WORDPRESS_TITLE" \
         --admin_user="$WORDPRESS_ADMIN" \
         --admin_password="$WORDPRESS_ADMIN_PASSWORD" \
         --admin_email="$WORDPRESS_ADMIN_EMAIL" \
