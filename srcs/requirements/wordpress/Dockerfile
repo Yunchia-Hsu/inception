@@ -13,7 +13,7 @@ RUN apk update && add mariadb-client \
     php83-json \
     wget
 
-COPY ./config/www.conf /etc/php83/php-fpm.d/www.conf
+COPY ./conf/www.conf /etc/php83/php-fpm.d/www.conf
 
 RUN mkdir -p /var/www/wp /var/www/html
 #run wp setup script
