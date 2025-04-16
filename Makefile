@@ -6,7 +6,7 @@
 #    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 10:54:00 by yhsu              #+#    #+#              #
-#    Updated: 2025/04/16 14:39:51 by yhsu             ###   ########.fr        #
+#    Updated: 2025/04/16 16:42:00 by yhsu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ logs:
 clean: 
 	@echo "$(BLUE)clean containers, images, and volumes.$(RESET)"
 #--rmi remove all images
-	@docker-compose -f $(COMPOSE_FILE) --rmi all -v
+	@docker-compose -f $(COMPOSE_FILE) down -v
 
 fclean: clean
 	@echo "$(BLUE)remove data directories.$(RESET)"
