@@ -42,7 +42,7 @@ else
 	echo "WordPress is already downloaded, installed and cinfogured."
 fi
 
-    chow -R www-data:www-data /var/www/html
+    chown -R www-data:www-data /var/www/html
 
     chmod -R 755 /var/www/html/
 
