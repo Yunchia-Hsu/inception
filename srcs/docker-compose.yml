@@ -63,13 +63,13 @@ volumes:
           o: bind
           device: /home/yhsu/data/mariadb
 
-      wordpress:
-          name: wordpress
-          drive: local
-          driver_opts:
-            type: none
-            o: bind 
-            device: /home/yhsu/data/wordpress
+    wordpress:
+        name: wordpress
+        drive: local
+        driver_opts:
+          type: none
+          o: bind 
+          device: /home/yhsu/data/wordpress
 
 networks:
     network:
