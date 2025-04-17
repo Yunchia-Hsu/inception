@@ -3,16 +3,13 @@ FROM alpine:3.20.6
 EXPOSE 9000
 RUN apk update && apk add mariadb-client \
     php83 \
-#fastcgi process manager (nginx uses to process php)
     php83-fpm \ 
     php83-phar \
-#connect php and mariadb
-    php83-mysqli \
-    php83 curl \
+	php83 curl \
+	php83-mysqli \
     php83-iconv \
     php83-json \
     wget
-
 
 COPY ./conf/www.conf /etc/php83/php-fpm.d/www.conf
 RUN mkdir -p /var/www/wp /var/www/html
