@@ -12,8 +12,8 @@ chmod +x /usr/local/bin/wp
 
 echo "check if mariadb is running before running wordpress"
 
-mariadb-admin ping --protocol=tcp --host=mariadb -u $WORDPRESS_DATABASE_USER --password=$WORDPRESS_DATABASE_USER_PASSWORD --wait=300 
-
+mariadb-admin ping --protocol=tcp --host=mariadb -u $WORDPRESS_DATABASE_USER --password=$WORDPRESS_DATABASE_PASSWORD --wait=300 
+                                                                                 
 if [ ! -f /var/www/html/wp-config.php ]; then
     echo "NOW, downlodaing, installing, configuring WordPress files..."
     wp core download --allow-root
@@ -38,7 +38,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         $WORDPRESS_USER $WORDPRESS_USER_EMAIL \
         --user_pass=$WORDPRESS_USER_PASSWORD
 else
-	echo "WordPress is already downloaded, installed and cinfogured."
+	echo "WordPress is already downloaded, installed and cinfigured."
 fi
 
     chown -R www-data:www-data /var/www/html
