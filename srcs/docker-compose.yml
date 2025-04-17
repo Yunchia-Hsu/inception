@@ -34,8 +34,8 @@ services:
       networks:
           - network
       healthcheck:
-          test: ["CMD", "mysqladmin", "ping", "--protocol=tcp", "--host=127.0.0.1", "-u", "yhsu", "--password=7885"]
           
+          test: ["CMD‑SHELL", "mysqladmin --protocol=tcp --host=127.0.0.1 -uyhsu -p7885 ping"]
           interval: 10s
           timeout: 5s
           retries: 5
