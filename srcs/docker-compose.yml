@@ -13,7 +13,7 @@ services:
       networks:
           - network
       healthcheck:
-          test: ["CMD", "mariadb-admin", "ping", "--protocol=tcp", "--host=127.0.0.1", "-u", "yhsu", "--password=7885"]
+          test: ["CMD", "mariadb-admin", "--protocol=tcp", "--host=127.0.0.1", "-u", "yhsu", "--password=7885", "ping"]
           interval: 10s
           timeout: 5s
           retries: 5
