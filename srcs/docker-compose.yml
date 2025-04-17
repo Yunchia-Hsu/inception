@@ -1,4 +1,25 @@
+volumes:
+    mariadb:
+        name: mariadb
+        driver: local
+        driver_opts: 
+          type: none
+          o: bind
+          device: /home/yhsu/data/mariadb
 
+    wordpress:
+        name: wordpress
+        driver: local
+        driver_opts:
+          type: none
+          o: bind 
+          device: /home/yhsu/data/wordpress
+
+networks:
+    network:
+      name: docker-network
+      driver: bridge
+      
 services:
     mariadb:
       container_name: mariadb
@@ -54,25 +75,3 @@ services:
         volumes: 
           - wordpress:/var/www/html
       
-
-volumes:
-    mariadb:
-        name: mariadb
-        driver: local
-        driver_opts: 
-          type: none
-          o: bind
-          device: /home/yhsu/data/mariadb
-
-    wordpress:
-        name: wordpress
-        driver: local
-        driver_opts:
-          type: none
-          o: bind 
-          device: /home/yhsu/data/wordpress
-
-networks:
-    network:
-      name: docker-network
-      driver: bridge
