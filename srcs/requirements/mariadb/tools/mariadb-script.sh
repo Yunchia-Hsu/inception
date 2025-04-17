@@ -23,7 +23,7 @@ FLUSG PRIVILEGES;
 EOF
 
 else
-    echo "MariaDB  was initialized. Database and users were confihured."
+    echo "MariaDB  was initialized. Database and users were configured."
 fi
 
 echo "mariadb server is running..."
