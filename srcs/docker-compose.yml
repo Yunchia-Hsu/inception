@@ -19,7 +19,7 @@ networks:
     network:
       name: docker-network
       driver: bridge
-      
+
 services:
     mariadb:
       container_name: mariadb
@@ -34,7 +34,8 @@ services:
       networks:
           - network
       healthcheck:
-          test: ["CMD", "mariadb-admin", "--protocol=tcp", "--host=127.0.0.1", "-u", "yhsu", "--password=7885", "ping"]
+          
+          test: ["CMD", "mariadb-admin", "ping", "--protocol=tcp", "--host=localhost", "-u", "$WORDPRESS_DATABASE_USER", "--password=$WORDPRESS_DATABASE_USER_PASSWORD"]
           interval: 10s
           timeout: 5s
           retries: 5

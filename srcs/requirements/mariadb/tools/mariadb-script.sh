@@ -24,8 +24,8 @@ FLUSH PRIVILEGES;
 EOF
 
 else
-    echo "==> MariaDB is already installed. Database and users are configured."
+    echo "MariaDB is already installed."
 fi
 
-echo "==> Starting MariaDB server..."
+echo "Starting MariaDB server..."
 exec mysqld --defaults-file=/etc/my.cnf.d/mariadb_config
