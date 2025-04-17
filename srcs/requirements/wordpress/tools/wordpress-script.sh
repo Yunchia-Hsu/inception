@@ -21,7 +21,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --dbname=$WORDPRESS_DATABASE_NAME \
         --dbuser=$WORDPRESS_DATABASE_USER \
         --dbpass=$WORDPRESS_DATABASE_PASSWORD \
-        --dbhost=mariadb:3306 \
+        --dbhost=mariadb \
         --force
 
     wp core install --url="$DOMAIN_NAME" --title="$WORDPRESS_TITLE" \
