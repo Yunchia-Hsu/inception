@@ -6,7 +6,7 @@
 #    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 10:54:00 by yhsu              #+#    #+#              #
-#    Updated: 2025/04/16 16:42:00 by yhsu             ###   ########.fr        #
+#    Updated: 2025/04/17 17:50:37 by yhsu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,8 @@ clean:
 
 fclean: clean
 	@echo "$(BLUE)remove data directories.$(RESET)"
-
+	@sudo rm -rf $(DATA_DIR)
+	@docker system prune -f --volumes
 
 re: fclean all
 
