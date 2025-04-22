@@ -13,33 +13,45 @@ chmod +x /usr/local/bin/wp
 echo "check if mariadb is running before running wordpress"
 
 mariadb-admin ping --protocol=tcp --host=mariadb -u $WORDPRESS_DATABASE_USER --password=$WORDPRESS_DATABASE_PASSWORD --wait=300 
-                                                                                 
+
+# —— 第一次安裝區塊（只在 wp-config.php 不存在時執行） ——
 if [ ! -f /var/www/html/wp-config.php ]; then
-    echo "NOW, downlodaing, installing, configuring WordPress files..."
-    wp core download --allow-root
-    wp config create \
-        --dbname=$WORDPRESS_DATABASE_NAME \
-        --dbuser=$WORDPRESS_DATABASE_USER \
-        --dbpass=$WORDPRESS_DATABASE_PASSWORD \
-        --dbhost=mariadb \
-        --force
+  echo "首次安裝：下載 WordPress，建立 wp-config.php 及安裝核心"
+  cd /var/www/html
 
-    wp core install --url="$DOMAIN_NAME" --title="$WORDPRESS_TITLE" \
-        --admin_user="$WORDPRESS_ADMIN" \
-        --admin_password="$WORDPRESS_ADMIN_PASSWORD" \
-        --admin_email="$WORDPRESS_ADMIN_EMAIL" \
-        --admin-root \
-        --skip-email \
-        --path=/var/www/html
+  wp core download --allow-root
 
-    echo "&&&create WP user..."
-    wp user create \
-        --allow-root \
-        $WORDPRESS_USER $WORDPRESS_USER_EMAIL \
-        --user_pass=$WORDPRESS_USER_PASSWORD
-else
-	echo "WordPress is already downloaded, installed and configured."
+  wp config create \
+    --dbname="$WORDPRESS_DATABASE_NAME" \
+    --dbuser="$WORDPRESS_DATABASE_USER" \
+    --dbpass="$WORDPRESS_DATABASE_PASSWORD" \
+    --dbhost=mariadb \
+    --force
+
+  wp core install \
+    --url="$DOMAIN_NAME" \
+    --title="$WORDPRESS_TITLE" \
+    --admin_user="$WORDPRESS_ADMIN" \
+    --admin_password="$WORDPRESS_ADMIN_PASSWORD" \
+    --admin_email="$WORDPRESS_ADMIN_EMAIL" \
+    --skip-email \
+    --path=/var/www/html
 fi
+
+# —— 自訂使用者檢查區塊（每次啟動都會檢查並補建立） ——
+echo "檢查並建立自訂使用者：$WORDPRESS_USER"
+if ! wp user get "$WORDPRESS_USER" --allow-root >/dev/null 2>&1; then
+  wp user create \
+    --allow-root \
+    "$WORDPRESS_USER" "$WORDPRESS_USER_EMAIL" \
+    --user_pass="$WORDPRESS_USER_PASSWORD"
+  echo "已建立使用者：$WORDPRESS_USER"
+else
+  echo "使用者 $WORDPRESS_USER 已存在，跳過建立。"
+fi
+
+
+
 
     chown -R www-data:www-data /var/www/html
 
