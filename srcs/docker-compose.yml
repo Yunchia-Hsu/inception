@@ -33,12 +33,7 @@ services:
           - mariadb:/var/lib/mysql
       networks:
           - network
-      healthcheck:
-          test: ["CMD-SHELL", "mysqladmin --protocol=tcp --host=mariadb -uyhsu -p7885 ping"]
-          
-          interval: 10s
-          timeout: 5s
-          retries: 5
+    
 
 
     wordpress:
