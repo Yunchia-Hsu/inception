@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "==> Setting up MariaDB directory..."
+echo "Setting up MariaDB directory..."
 chmod -R 755 /var/lib/mysql
 
 mkdir -p /run/mysqld 

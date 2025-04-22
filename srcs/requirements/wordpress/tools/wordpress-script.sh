@@ -16,7 +16,7 @@ mariadb-admin ping --protocol=tcp --host=mariadb -u $WORDPRESS_DATABASE_USER --p
 
 # —— 第一次安裝區塊（只在 wp-config.php 不存在時執行） ——
 if [ ! -f /var/www/html/wp-config.php ]; then
-  echo "首次安裝：下載 WordPress，建立 wp-config.php 及安裝核心"
+  echo "first time install：download WordPress，create wp-config.php and install core"
   cd /var/www/html
 
   wp core download --allow-root
@@ -39,15 +39,15 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 fi
 
 # —— 自訂使用者檢查區塊（每次啟動都會檢查並補建立） ——
-echo "檢查並建立自訂使用者：$WORDPRESS_USER"
+echo "check and build user：$WORDPRESS_USER"
 if ! wp user get "$WORDPRESS_USER" --allow-root >/dev/null 2>&1; then
   wp user create \
     --allow-root \
     "$WORDPRESS_USER" "$WORDPRESS_USER_EMAIL" \
     --user_pass="$WORDPRESS_USER_PASSWORD"
-  echo "已建立使用者：$WORDPRESS_USER"
+  echo "user existed：$WORDPRESS_USER"
 else
-  echo "使用者 $WORDPRESS_USER 已存在，跳過建立。"
+  echo "user $WORDPRESS_USER is here，no need to build again。"
 fi
 
 

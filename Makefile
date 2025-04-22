@@ -6,7 +6,7 @@
 #    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 10:54:00 by yhsu              #+#    #+#              #
-#    Updated: 2025/04/22 17:32:16 by yhsu             ###   ########.fr        #
+#    Updated: 2025/04/22 19:50:10 by yhsu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,12 @@ all: mariadb_data wordpress_data
 	@echo "DONE~~~"
 
 
-
+#build image according to the build in compose file
 images:
 	@docker compose -f $(COMPOSE_FILE) build	
 
 
-# Start all containers in detached mode
+# Start all containers in detached mode -d   就像你把程式「最小化到背景」
 up:
 	@docker compose -f $(COMPOSE_FILE) up -d
 

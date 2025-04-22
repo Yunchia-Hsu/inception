@@ -11,7 +11,7 @@ RUN apk update && apk add mariadb-client \
 	wget 
 
 COPY ./conf/www.conf /etc/php83/php-fpm.d/www.conf
-
+#1. 臨時工作區／安裝區 解壓套件、編譯或修改檔案 2.正式公開的 Web 根目錄N ginx 或 Apache 只會去這裡抓 index.php
 RUN mkdir -p /var/www/wp /var/www/html
 
 COPY ./tools/wordpress-script.sh /usr/local/bin/wordpress-script.sh
