@@ -26,7 +26,7 @@ services:
       build: ./requirements/mariadb
       image: mariadb:10.11.11
       restart: always
-      env_file: .env
+      env_file: myenv.env
       ports:
           - "3306:3306"
       volumes:
@@ -46,7 +46,7 @@ services:
         build: ./requirements/wordpress
         image: worldpress:6.7.2
         restart: always
-        env_file: .env
+        env_file: myenv.env
         networks:
           - network
         volumes:
@@ -65,7 +65,7 @@ services:
         build: ./requirements/nginx
         image: nginx:1.26.2
         restart: always
-        env_file: .env
+        env_file: myenv.env
         depends_on:
           wordpress:
             condition: service_healthy
