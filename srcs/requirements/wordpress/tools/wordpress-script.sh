@@ -32,13 +32,13 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --skip-email \
         --path=/var/www/html
 
-    echo "create WP user..."
+    echo "&&&create WP user..."
     wp user create \
         --allow-root \
         $WORDPRESS_USER $WORDPRESS_USER_EMAIL \
         --user_pass=$WORDPRESS_USER_PASSWORD
 else
-	echo "WordPress is already downloaded, installed and cinfigured."
+	echo "WordPress is already downloaded, installed and configured."
 fi
 
     chown -R www-data:www-data /var/www/html
