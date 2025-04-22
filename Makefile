@@ -1,70 +1,50 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/04/16 10:54:00 by yhsu              #+#    #+#              #
-#    Updated: 2025/04/17 18:14:36 by yhsu             ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
+# Colors
+RESET=$(shell echo -e "\033[0m")
+GREEN=$(shell echo -e "\033[1;32m")
 BLUE=$(shell echo -e "\033[1;34m")
-RESET=$(shell echo -e "\033[00m")
+YELLOW=$(shell echo -e "\033[1;33m")
+RED=$(shell echo -e "\033[1;31m")
 
-MARIADB_DIR=/home/yhsu/data/mariadb
-WORDPRESS_DIR=/home/yhsu/data/wordpress
-DATA_DIR = /home/yhsu/data
+# Paths
+DATA_DIR=/home/tmenkovi/data
+MARIADB_DIR=$(DATA_DIR)/mariadb
+WORDPRESS_DIR=$(DATA_DIR)/wordpress
+
+# Docker Compose File
 COMPOSE_FILE=srcs/docker-compose.yml
 
-
-
-#targets 
-
-# Build all direcotries, activate Docker  images defined in docker-compose.yml
-
+# Targets
 all: mariadb_data wordpress_data
-	@echo "$(BLUE)creating MariaDb directory$(RESET)"
-	@mkdir -p $(MARIADB_DIR) 
-	@echo "$(BLUE)creating Wordpress directory$(RESET)"
-	@mkdir -p $(WORDPRESS_DIR) 
-	@echo "$(BLUE)building images and activating containers$(RESET)"
-	@$(MAKE) images 
+	@echo "$(YELLOW)==> Creating MariaDB data directory...$(RESET)"
+	@mkdir -p $(MARIADB_DIR)
+	@echo "$(YELLOW)==> Creating WordPress data directory...$(RESET)"
+	@mkdir -p $(WORDPRESS_DIR)
+	@echo "$(YELLOW)==> Building and starting containers...$(RESET)"
+	@$(MAKE) images
 	@$(MAKE) up
-	@echo "DONE~~~"
-
-
+	@echo "$(GREEN)==> Done!$(RESET)"
 
 images:
-	@docker compose -f $(COMPOSE_FILE) build	
+	@echo "$(BLUE)==> Building Docker images...$(RESET)"
+	@docker compose -f $(COMPOSE_FILE) build
 
-
-# Start all containers in detached mode
 up:
+	@echo "$(BLUE)==> Starting containers...$(RESET)"
 	@docker compose -f $(COMPOSE_FILE) up -d
 
-
-# Stop and remove containers, networks, volumes, and images 
 down:
-	@docker compose -f $(COMPOSE_FILE)  down
+	@echo "$(RED)==> Stopping containers...$(RESET)"
+	@docker compose -f $(COMPOSE_FILE) down
 
-
-
-#follow logs for all services
-logs:
-	docker compose -f $(COMPOSE_FILE)  logs -f
-
-clean: 
-	@echo "$(BLUE)clean containers, images, and volumes.$(RESET)"
-#--rmi remove all images
+clean:
+	@echo "$(RED)==> Removing containers, images, and volumes...$(RESET)"
 	@docker compose -f $(COMPOSE_FILE) down --rmi all -v
 
 fclean: clean
-	@echo "$(BLUE)remove data directories.$(RESET)"
+	@echo "$(RED)==> Removing data directories...$(RESET)"
 	@sudo rm -rf $(DATA_DIR)
 	@docker system prune -f --volumes
 
 re: fclean all
 
-.PHONY: all clean fclean re up down mariadb_data wordpress_data image
+.PHONY: all clean fclean re up down mariadb_data wordpress_data images
