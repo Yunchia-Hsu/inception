@@ -6,7 +6,7 @@
 #    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 10:54:00 by yhsu              #+#    #+#              #
-#    Updated: 2025/04/22 19:50:10 by yhsu             ###   ########.fr        #
+#    Updated: 2025/04/23 12:22:22 by yhsu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,12 +56,12 @@ logs:
 	docker compose -f $(COMPOSE_FILE)  logs -f
 
 clean: 
-	@echo "$(BLUE)clean containers, images, and volumes.$(RESET)"
+	@echo "$(BLUE)clean containers, images"
 #--rmi remove all images
 	@docker compose -f $(COMPOSE_FILE) down --rmi all -v
 
 fclean: clean
-	@echo "$(BLUE)remove data directories.$(RESET)"
+	@echo "$(BLUE)remove data directories. and volumes$(RESET)"
 	@sudo rm -rf $(DATA_DIR)
 	@docker system prune -f --volumes
 
